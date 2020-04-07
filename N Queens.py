@@ -3,10 +3,10 @@ import time
 timer = time.time()
 sols = 0
 
-def can_extend(perm):
-    i = len(perm) - 1
+def can_extend(perm, k):
+    i = len(perm)
     for j in range(i):
-        if i-j == abs(perm[i] - perm[j]):
+        if i-j == abs(k - perm[j]):
             return False
     return True
 
@@ -17,10 +17,10 @@ def n_queens(perm, n):
         return
     for k in range(n):
         if k not in perm:
-            perm.append(k)
-            if can_extend(perm):
+            if can_extend(perm, k):
+                perm.append(k)
                 n_queens(perm, n)
-            perm.pop()
+                perm.pop()
 
 for n in range(2, 13):
     sols = 0
